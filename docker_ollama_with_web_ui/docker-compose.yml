@@ -1,4 +1,3 @@
-
 services:
   ollama:
     image: ollama/ollama
@@ -8,6 +7,8 @@ services:
       - "11434:11434"
     volumes:
       - /home/ollama:/root/.ollama
+    networks:
+      - webui-network
     deploy:
       resources:
         reservations:
@@ -19,12 +20,16 @@ services:
     container_name: open-webui
     restart: always 
     ports:
-      - "8080:8000"
+      - "3000:8080"
     environment:
-      - OLLAMA_BASE_URL=http://127.0.0.1:11434
+      - OLLAMA_BASE_URL=http://ollama:11434
     volumes:
       - open-webui:/app/backend/data
-    network_mode: host
+    networks:
+      - webui-network
 
 volumes:
   open-webui:
+
+networks:
+  webui-network:
