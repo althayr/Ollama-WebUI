@@ -9,6 +9,7 @@ This docker-compose configuration contains all you need to run ollama with a web
 
 - Docker and docker-compose
 - `nvidia-container-runtime` library for GPU support
+  - If you don't want to use GPU's (not recommended) then remove the `deploy` section in the `docker-compose.yml` file.
 
 ## How to use
 
