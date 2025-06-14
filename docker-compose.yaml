@@ -1,0 +1,35 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    restart: always 
+    ports:
+      - "11434:11434"
+    volumes:
+      - /home/ollama:/root/.ollama
+    networks:
+      - webui-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: always 
+    ports:
+      - "8080:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - open-webui:/app/backend/data
+    networks:
+      - webui-network
+
+volumes:
+  open-webui:
+
+networks:
+  webui-network:

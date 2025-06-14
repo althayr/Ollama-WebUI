@@ -8,15 +8,16 @@ This docker-compose configuration contains all you need to run ollama with a web
 ## Dependencies
 
 - Docker and docker-compose
-- `nvidia-container-runtime` library for GPU support
-  - If you don't want to use GPU's (not recommended) then remove the `deploy` section in the `docker-compose.yml` file.
+- If using a GPU: `nvidia-container-runtime` library for GPU support
 
 ## How to use
 
-1. `cd` in to this repository
-2. `docker-compose up -d`
+- GPU version: `docker-compose up`
+- CPU-only version: `docker-compose -f docker-compose-cpu.yaml up`
+
+**Note:** To run the servers in the background just add the `-d` to the statements above
 
 And that's it! Now you can access Ollama and the UI from the browser:
 
 **Ollama:** http://localhost:11434  
-**Open Web UI:** http://localhost:3000
+**Open Web UI:** http://localhost:8080
